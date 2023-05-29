@@ -2,6 +2,7 @@ body {
     font-family: 'Roboto', sans-serif;
     padding: 4rem;
 
+    background-color: #1f1f1f;
     background-size: cover;
 }
 
@@ -79,4 +80,78 @@ body {
     width: 100%;
     height: 100%;
     z-index: 1;
+}
+
+#user-info, #signin-btn, #signout-btn {
+    color: white;
+    padding: 0.5rem;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    margin-bottom: 2rem;
+}
+
+#dashboard-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#dashboard-list a {
+    display: inline-block;
+    margin: 10px;
+    padding: 10px;
+    width: 200px;
+    text-align: center;
+    color: white;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    text-decoration: none;
+}
+
+.new-link-card {
+    background: rgba(0, 255, 0, 0.2);
+    border: 1px solid rgba(0, 255, 0, 0.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5em;
+}
+
+
+
+
+#dashboard-container {
+    margin-left: 200px;
+}
+
+#sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 200px;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    border-right: 1px solid rgba(255, 255, 255, 0.3);
+    overflow-y: auto;
+    padding: 1rem;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+}
+
+#sidebar .dashboard-item {
+    display: block;
+    padding: 0.5rem;
+    color: white;
+    margin-bottom: 1rem;
+    cursor: pointer;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+#sidebar .dashboard-item:hover {
+    color: rgba(255, 255, 255, 0.8);
 }

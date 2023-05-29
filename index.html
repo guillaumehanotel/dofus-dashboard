@@ -2,31 +2,38 @@
 <html class="no-js" lang="fr">
 
 <head>
-  <meta charset="utf-8">
-  <title>Link Dashboard</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+    <meta charset="utf-8">
+    <title>Link Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
 
-  <link rel="stylesheet" href="css/normalize.css">
-  <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/main.css">
 
-  <meta name="theme-color" content="#fafafa">
+    <meta name="theme-color" content="#fafafa">
 </head>
 
 <body>
 
 <div class="input-container">
-  <input class="input-json"
-         type="text"
-         value="https://gist.githubusercontent.com/guillaumehanotel/c211c9b80be6d7545694b262e0db3e5f/raw/3d7562a403a93dd4060c873125344d67c2d48a0f/dofus-sites.json">
+    <button id="signin-btn">Se connecter avec Google</button>
+    <button id="signout-btn" onclick="signOut()">Se déconnecter</button>
+    <p id="user-info"></p>
+
+
+    <!-- Ajouter un input pour le titre du tableau de liens -->
+    <input class="dashboard-title"
+           type="text"
+           placeholder="Titre du tableau">
+
+    <!-- Ajouter un bouton pour sauvegarder le tableau de liens -->
+    <button class="save-dashboard">Sauvegarder le tableau</button>
 </div>
 
-  <div class="sites-container">
+<div id="dashboard-list"></div>
 
-  </div>
-
-  <script type="module" src="js/main.js"></script>
+<!-- Ajouter un script pour le client Supabase -->
+<script type="module" src="js/main.js"></script>
 </body>
 
 </html>
-
