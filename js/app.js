@@ -1,10 +1,4 @@
-import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
-
-const SUPABASE_URL = process.env.SUPABASE_URL;
-const SUPABASE_ANON_KEY = process.env.SUPABASE_ANON_KEY;
-
-const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
-
+import supabase from './supabaseClient.js';
 
 // Fonction pour se déconnecter
 async function signOut() {
@@ -20,7 +14,10 @@ async function signOut() {
 
 async function signInWithGoogle() {
     const { data, error } = await supabase.auth.signInWithOAuth({
-        provider: 'google'
+        provider: 'google',
+        options: {
+            redirectTo: 'http://127.0.0.1:8080'
+        }
     })
     if (error) {
         console.error('Error signing in: ', error.message);
@@ -35,6 +32,7 @@ async function signInWithGoogle() {
 // Fonction pour récupérer les dashboards de l'utilisateur
 // Fonction pour récupérer les dashboards de l'utilisateur
 async function fetchDashboards(userId) {
+    console.log("FETCH DASHBOARDS")
     const { data: dashboards, error } = await supabase
         .from('dashboards')
         .select('*')

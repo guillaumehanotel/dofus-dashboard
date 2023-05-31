@@ -1,10 +1,4 @@
-import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
-
-
-const SUPABASE_URL = process.env.SUPABASE_URL;
-const SUPABASE_ANON_KEY = process.env.SUPABASE_ANON_KEY;
-
-const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
+import supabase from './supabaseClient.js'; // ou './supabaseClient.js' ou './db.js', etc.
 
 
 // Récupérer l'identifiant du dashboard à partir de l'URL
@@ -41,7 +35,7 @@ async function fetchDashboards() {
 
 
 // Fonction pour récupérer le dashboard
-async function fetchDashboard(id) {
+async function fetchLinksByDashboard(id) {
     const { data: dashboard, error } = await supabase
         .from('dashboards')
         .select(`
@@ -113,12 +107,13 @@ async function fetchDashboard(id) {
             if (!url) return;  // L'utilisateur a cliqué sur "Cancel" ou n'a entré aucune URL
 
             // Ouvrir une boîte de dialogue pour entrer le titre du nouveau lien
-            const title = window.prompt('Enter the title of the new link:');
-            if (!title) return;  // L'utilisateur a cliqué sur "Cancel" ou n'a entré aucun titre
+            const title = getSiteName(url)
 
             // Ouvrir une boîte de dialogue pour entrer l'image du nouveau lien
-            const image = window.prompt('Enter the image URL of the new link:');
-            if (!image) return;  // L'utilisateur a cliqué sur "Cancel" ou n'a entré aucune image
+            let image = window.prompt('Enter the image URL of the new link:');
+            if (!image) {
+                image = 'https://caer.univ-amu.fr/wp-content/uploads/default-placeholder.png';
+            }
 
             // Ajouter le nouveau lien à la base de données
             addNewLink(url, title, image);
@@ -135,12 +130,53 @@ async function fetchDashboard(id) {
                 console.error('Error adding new link:', error);
             } else {
                 // Recharger le tableau de bord pour montrer le nouveau lien
-                fetchDashboard(dashboardId);
+                fetchLinksByDashboard(dashboardId);
             }
         }
 
     }
 }
 
-fetchDashboard(dashboardId);
+
+function getSiteName(url) {
+    try {
+        // Crée un nouvel objet URL
+        let urlObject = new URL(url);
+
+        // Récupère le nom d'hôte (ex : www.google.com)
+        let hostname = urlObject.hostname;
+
+        // Supprime les 'www.' si présents
+        if (hostname.startsWith('www.')) {
+            hostname = hostname.slice(4);
+        }
+
+        // Divise le nom de domaine en parties
+        let parts = hostname.split('.');
+
+        // La liste des domaines de premier niveau les plus courants
+        const tlds = ['com', 'org', 'net', 'io', 'co', 'gov', 'edu', 'ac', 'fr'];
+
+        // Si le domaine de premier niveau est dans la liste, prend la partie juste avant
+        if (tlds.includes(parts[parts.length - 1])) {
+            let siteName = parts[parts.length - 2];
+
+            // Capitalise la première lettre et renvoie
+            return siteName.charAt(0).toUpperCase() + siteName.slice(1);
+        } else {
+            // Sinon, prend la première partie comme nom du site
+            let siteName = parts[0];
+
+            // Capitalise la première lettre et renvoie
+            return siteName.charAt(0).toUpperCase() + siteName.slice(1);
+        }
+
+    } catch (error) {
+        console.error('Invalid URL');
+        return null;
+    }
+}
+
+
+fetchLinksByDashboard(dashboardId);
 fetchDashboards()
