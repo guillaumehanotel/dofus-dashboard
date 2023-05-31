@@ -16,7 +16,7 @@ async function signInWithGoogle() {
     const { data, error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
         options: {
-            redirectTo: 'http://127.0.0.1:8080'
+            redirectTo: window.location.origin
         }
     })
     if (error) {
