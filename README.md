@@ -1,5 +1,5 @@
 
-
+[![Netlify Status](https://api.netlify.com/api/v1/badges/588928b7-440f-4cf5-91e7-e1be8e5a56cb/deploy-status)](https://app.netlify.com/sites/favoris/deploys)
 
 J'aimerai faire une application web : 
 
