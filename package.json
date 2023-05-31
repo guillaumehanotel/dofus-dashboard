@@ -4,8 +4,8 @@
   "description": "J'aimerai faire une application web :",
   "main": "index.js",
   "scripts": {
-    "build": "../node_modules/.bin/webpack",
-    "dev": "../node_modules/.bin/webpack serve"
+    "build": "node_modules/.bin/webpack",
+    "dev": "node_modules/.bin/webpack serve"
   },
   "keywords": [],
   "author": "",

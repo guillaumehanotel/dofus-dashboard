@@ -50,7 +50,7 @@ Le HTML :
 
   </div>
 
-  <script type="module" src="test/js/app.js"></script>
+  <script type="module" src="js/app.js"></script>
 </body>
 
 </html>
